@@ -34,5 +34,5 @@ bundle install
 ### Usage
 
 ```` sh
-ruby extract_events.rb
+ruby extract.rb
 ````

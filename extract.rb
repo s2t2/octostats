@@ -1,6 +1,7 @@
 require 'octokit'
 require 'pry'
 require 'pp'
+# require 'active_support/all'
 
 ACCESS_TOKEN = ENV["OCTOSTATS_GITHUB_ACCESS_TOKEN"]
 raise "MISSING ACCESS TOKEN" unless ACCESS_TOKEN
@@ -52,6 +53,7 @@ end
 
 def traverse_user_events
   @counter = 0
+  #user_events = @client.user_events(@user[:login], :per_page => 100, :since => 3.weeks.ago)
   user_events = @client.user_events(@user[:login], :per_page => 100)
   extract_user_events(user_events)
   while @client.last_response.rels[:next]
@@ -91,5 +93,5 @@ end
 #
 
 extract_user
-# traverse_user_events
+# traverse_user_events # there are hundreds of thousands of events ...
 traverse_user_repos
