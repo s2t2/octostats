@@ -31,8 +31,31 @@ cd octostats/
 bundle install
 ````
 
+Create database user.
+
+```` sh
+psql
+CREATE USER octocat WITH ENCRYPTED PASSWORD '0ct0cat!';
+ALTER USER octocat CREATEDB;
+ALTER USER octocat WITH SUPERUSER;
+\q
+````
+
+Create database.
+
+```` sh
+psql -U octocat --password -d postgres -f $(pwd)/db/create.sql
+````
+
+Micgrate database.
+
+```` sh
+ruby db/migrate/create_github_users.rb
+ruby db/migrate/create_github_events.rb
+````
+
 ### Usage
 
 ```` sh
-ruby extract.rb
+ruby script/extract_user_events.rb
 ````
