@@ -26,8 +26,8 @@ Login to github,
 Download source code and install package dependencies.
 
 ```` sh
-git clone ________
-cd _______/
+git clone git@github.com:s2t2/octostats.git
+cd octostats/
 bundle install
 ````
 
