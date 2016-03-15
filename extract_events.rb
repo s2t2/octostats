@@ -11,19 +11,22 @@ raise "MISSING ACCESS TOKEN" unless ACCESS_TOKEN
 # USER
 #
 
-user = @client.user
-pp ({
-  :id => user[:id],
-  :type => user[:type],
-  :login => user[:login],
-  :name => user[:name],
-  :followers => user[:followers],
-  :following => user[:following],
-  :avatar_url => user[:avatar_url],
-  :blog_url => user[:blog],
-  :created_at => user[:created_at],
-  :updated_at => user[:updated_at]
-})
+@user = @client.user
+
+def extract_user
+  pp ({
+    :id => @user[:id],
+    :type => @user[:type],
+    :login => @user[:login],
+    :name => @user[:name],
+    :followers => @user[:followers],
+    :following => @user[:following],
+    :avatar_url => @user[:avatar_url],
+    :blog_url => @user[:blog],
+    :created_at => @user[:created_at],
+    :updated_at => @user[:updated_at]
+  })
+end
 
 #
 # USER EVENTS
@@ -47,14 +50,46 @@ def extract_user_events(user_events)
   #end
 end
 
-@counter = 0
-user_events = @client.user_events(user[:login], :per_page => 100)
-extract_user_events(user_events)
-while @client.last_response.rels[:next]
-  user_events = @client.last_response.rels[:next].get.data
+def traverse_user_events
+  @counter = 0
+  user_events = @client.user_events(@user[:login], :per_page => 100)
   extract_user_events(user_events)
+  while @client.last_response.rels[:next]
+    user_events = @client.last_response.rels[:next].get.data
+    extract_user_events(user_events)
+  end
 end
 
+#
 # USER REPOS CONTRIBUTED TO
+#
 
+# @param [Array] user_repos
+def extract_user_repos(user_repos)
+  @counter += user_repos.count
+  puts "#{@counter} REPOS"
+  #user_repos.each do |user_repo|
+  #end
+end
+
+def traverse_user_repos
+  @counter = 0
+  user_repos = @client.repos(@user[:login], :per_page => 100)
+  extract_user_repos(user_repos)
+  while @client.last_response.rels[:next]
+    user_events = @client.last_response.rels[:next].get.data
+    extract_user_events(user_events)
+  end
+end
+
+#
 # USER COMMITS
+#
+
+#
+# TASKS
+#
+
+extract_user
+# traverse_user_events
+traverse_user_repos
