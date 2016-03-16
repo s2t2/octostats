@@ -28,7 +28,7 @@ module GithubService
         :github_user_id => e[:actor].try(:id),
         :github_org_id => e[:org].try(:id),
         :github_repo_id => e[:repo].try(:id),
-        :payload => e[:payload],
+        :payload => e[:payload].try(:to_hash),
         :public => e[:public],
         :created_at => e[:created_at]
       })

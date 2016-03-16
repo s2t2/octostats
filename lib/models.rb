@@ -17,4 +17,5 @@ end
 
 class GithubEvent < ActiveRecord::Base
   self.primary_key = :id
+  serialize(:payload, Hash)
 end
