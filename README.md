@@ -58,4 +58,5 @@ ruby db/migrate/create_github_events.rb
 
 ```` sh
 ruby script/extract_user_events.rb
+ruby script/get_archived_events.rb
 ````
