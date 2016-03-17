@@ -52,6 +52,7 @@ Micgrate database.
 ```` sh
 ruby db/migrate/create_github_users.rb
 ruby db/migrate/create_github_events.rb
+ruby db/migrate/create_github_archive_users.rb
 ruby db/migrate/create_github_archive_events.rb
 ````
 
@@ -59,5 +60,5 @@ ruby db/migrate/create_github_archive_events.rb
 
 ```` sh
 ruby script/extract_user_events.rb
-ruby script/get_archived_events.rb
+ruby script/extract_archived_events.rb
 ````

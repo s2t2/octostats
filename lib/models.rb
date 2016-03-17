@@ -20,5 +20,9 @@ class GithubEvent < ActiveRecord::Base
   serialize(:payload, Hash)
 end
 
+class GithubArchiveUser < ActiveRecord::Base
+  serialize(:repos, Array)
+end
+
 class GithubArchiveEvent < ActiveRecord::Base
 end
