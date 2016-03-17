@@ -21,5 +21,4 @@ class GithubEvent < ActiveRecord::Base
 end
 
 class GithubArchiveEvent < ActiveRecord::Base
-  self.primary_key = :id
 end

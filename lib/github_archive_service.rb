@@ -7,12 +7,13 @@ module GithubArchiveService
 
     if response["events"]
       response["events"].each do |e|
-        unless e["_event_id"] # some events pre-2015 don't have an event_id (see https://github.com/tenex/github-contributions/issues/52#issue-130375804)
+        unless e["_id"]
           puts e
           next
         end
-        event = GithubArchiveEvent.where({:id => e["_event_id"]}).first_or_create!
+        event = GithubArchiveEvent.where({:gh_id => e["_id"]}).first_or_create!
         event.update_attributes!({
+          :gh_event_id => e["_event_id"], # some events pre-2015 don't have an event_id (see https://github.com/tenex/github-contributions/issues/52#issue-130375804)
           :event_type => e["type"],
           :user => e["_user_lower"],
           :org => e["_org_lower"],
