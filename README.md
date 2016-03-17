@@ -52,6 +52,7 @@ Micgrate database.
 ```` sh
 ruby db/migrate/create_github_users.rb
 ruby db/migrate/create_github_events.rb
+ruby db/migrate/create_github_archive_events.rb
 ````
 
 ### Usage
