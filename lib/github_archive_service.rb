@@ -10,7 +10,7 @@ module GithubArchiveService
     user = GithubArchiveUser.where({:username => response["username"]}).first_or_create!
     user.update_attributes!({
       :repos => response["repos"],
-      :event_count => response["event_count"]
+      :event_count => response["eventCount"]
     })
   end
 
@@ -29,7 +29,7 @@ module GithubArchiveService
           :repo => e["_repo_lower"],
           :public => true,
           :created_at => e["created_at"]
-          })
+        })
       end
     end
 
